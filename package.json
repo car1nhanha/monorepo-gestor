@@ -1,0 +1,10 @@
+{
+  "name": "gestor-do-povo",
+  "version": "1.0.0",
+  "scripts": {
+    "docker:clean": "sh ./scripts/docker-clean.sh",
+    "docker:up": "sh ./scripts/docker-up.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

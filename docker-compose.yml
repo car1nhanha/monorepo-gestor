@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gestordb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - mailhog
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=gestordb
+      - APP_URL=http://localhost:3000
+      - NODE_ENV=production
+      - OPENCAGE_API_KEY="${OPENCAGE_API_KEY}"
+      - MAIL_HOST=mailhog
+      - MAIL_PORT=1025
+      - MAIL_USER=teste@teste.com
+      - MAIL_PASS=teste
+      - JWT_SECRET=shrek
+      - APP_NAME=${APP_NAME}
+    volumes:
+      - ./api:/app/api
+
+volumes:
+  postgres-data:
