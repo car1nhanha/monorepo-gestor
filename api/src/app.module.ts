@@ -18,23 +18,29 @@ import { UsersModule } from './user/user.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         const isProduction = configService.get('NODE_ENV') === 'production';
-        return isProduction
-          ? {
-              type: 'postgres',
-              host: configService.get('DATABASE_HOST'),
-              port: configService.get<number>('DATABASE_PORT'),
-              username: configService.get('DATABASE_USERNAME'),
-              password: configService.get('DATABASE_PASSWORD'),
-              database: configService.get('DATABASE_NAME'),
-              autoLoadEntities: true,
-              synchronize: true,
-            }
-          : {
-              type: 'sqlite',
-              database: configService.get('DATABASE_NAME'),
-              autoLoadEntities: true,
-              synchronize: true,
-            };
+        if (isProduction) {
+          const username = configService.get('DATABASE_USERNAME');
+          const password = configService.get('DATABASE_PASSWORD');
+          const host = configService.get('DATABASE_HOST');
+          const port = configService.get<number>('DATABASE_PORT');
+          const database = configService.get('DATABASE_NAME');
+          const poolMode = configService.get('DATABASE_POOL_MODE');
+          // Monta a connection string com o pool_mode
+          const connectionUrl = `postgres://${username}:${password}@${host}:${port}/${database}?pool_mode=${poolMode}`;
+          return {
+            type: 'postgres',
+            url: connectionUrl,
+            autoLoadEntities: true,
+            synchronize: true,
+          };
+        } else {
+          return {
+            type: 'sqlite',
+            database: configService.get('DATABASE_NAME'),
+            autoLoadEntities: true,
+            synchronize: true,
+          };
+        }
       },
       inject: [ConfigService],
     }),
