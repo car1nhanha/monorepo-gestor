@@ -44,10 +44,13 @@ export class AuthService {
   async register(registerDto: RegisterDto): Promise<{ message: string }> {
     const { name, email, password, cep } = registerDto;
 
+    const address = await LocationUtil.buscarCep(cep);
+    if (!address.cep) throw new BadRequestException('Erro ao buscar o CEP.');
+
     const { results } = await LocationUtil.buscarGeolocalizacao(cep);
-    if (!results || results.length === 0) {
-      throw new BadRequestException('CEP inválido.');
-    }
+    if (!results || results.length === 0)
+      throw new BadRequestException('Erro ao buscar a geolocalização.');
+
     const location = {
       lat: results[0].geometry.lat,
       lng: results[0].geometry.lng,
@@ -65,7 +68,12 @@ export class AuthService {
       password,
       location,
       role: UserRole.ADMIN,
-      postal_code: cep,
+      address: {
+        street: address.logradouro,
+        city: address.localidade,
+        state: address.uf,
+        postal_code: address.cep,
+      },
     });
     await this.userRepository.save(user);
 

@@ -3,11 +3,11 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   Param,
   Post,
   Put,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -97,10 +97,8 @@ export class UsersController {
   @ApiBearerAuth()
   @Post('invite')
   @ApiOperation({ summary: 'Envia convite para um volunteer' })
-  async inviteUser(
-    @Headers('x-user-id') xUserId: string,
-    @Body() inviteUserDto: InviteUserDto,
-  ) {
-    return await this.usersService.inviteUser(xUserId, inviteUserDto);
+  async inviteUser(@Body() inviteUserDto: InviteUserDto, @Req() req) {
+    console.log({ 'req.user': req.user });
+    return await this.usersService.inviteUser(req.user.id, inviteUserDto);
   }
 }

@@ -21,7 +21,7 @@ export class CreateProjectDto {
   description: string;
 
   @ApiProperty({
-    example: 'organization-uuid',
+    example: '1e001173-fcb4-4a60-b846-9729ccc8faeb',
     description: 'UUID of the organization',
   })
   @IsNotEmpty()

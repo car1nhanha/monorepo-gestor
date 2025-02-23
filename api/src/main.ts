@@ -7,8 +7,19 @@ import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  console.log({
+    DATABASE_HOST: process.env.DATABASE_HOST,
+    DATABASE_PORT: process.env.DATABASE_PORT,
+    DATABASE_USERNAME: process.env.DATABASE_USERNAME,
+    DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+    DATABASE_NAME: process.env.DATABASE_NAME,
+  });
 
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+  });
   app.use(cookieParser());
 
   const config = new DocumentBuilder()

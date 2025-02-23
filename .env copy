@@ -1,0 +1,19 @@
+NODE_ENV=production
+PORT=3000
+API_URL=http://localhost:3000
+
+DATABASE_HOST=db.cbmajhqstfwefedejjtr.supabase.co
+DATABASE_PORT=5432
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=qoqmU4-vikkyr-gogbiz
+DATABASE_NAME=postgres
+
+MAIL_HOST=live.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USER=smtp@mailtrap.io
+MAIL_PASS=5fb8568a00b6869be4a917e77c979ade
+
+JWT_SECRET=shrek
+
+OPENCAGE_API_KEY=0dd943c36c2a4b36b7b5b58e49eb5fb9
+APP_NAME="Gestor do Povo - Desenvolvimento"

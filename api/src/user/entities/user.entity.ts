@@ -38,6 +38,24 @@ export class User {
   email: string;
 
   @ApiProperty({
+    example: {
+      street: 'Av. Paulista, 1000',
+      city: 'São Paulo',
+      state: 'SP',
+      postal_code: '01310-100',
+    },
+    description:
+      'The address of the user, including street, city, state and postal code',
+  })
+  @Column({ type: 'simple-json', nullable: true })
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postal_code?: string;
+  };
+
+  @ApiProperty({
     example: { lat: 0, lng: 0 },
     description: 'The location of the user',
   })
@@ -48,17 +66,10 @@ export class User {
   };
 
   @ApiProperty({
-    example: '01001000',
-    description: 'The postal code of the user',
-  })
-  @Column({ nullable: true })
-  postal_code?: string;
-
-  @ApiProperty({
-    example: 'volunteer',
+    example: 'admin',
     description: 'The role of the user',
   })
-  @Column({ default: UserRole.VOLUNTEER })
+  @Column({ default: UserRole.ADMIN })
   role: UserRole;
 
   @ApiProperty({

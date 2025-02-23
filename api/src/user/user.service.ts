@@ -28,6 +28,10 @@ export class UsersService {
       const userExists = await this.getUserByEmail(userData.email);
       if (userExists) throw new BadRequestException('Usuário já cadastrado');
 
+      const address = await LocationUtil.buscarCep(cep);
+      console.log({ address });
+      if (!address.cep) throw new BadRequestException('Erro ao buscar o CEP.');
+
       const { results } = await LocationUtil.buscarGeolocalizacao(cep);
       if (!results || results.length === 0) {
         throw new BadRequestException('CEP inválido.');
@@ -41,6 +45,12 @@ export class UsersService {
         ...userData,
         location,
         role: UserRole.VOLUNTEER,
+        address: {
+          street: address.logradouro,
+          city: address.localidade,
+          state: address.uf,
+          postal_code: address.cep,
+        },
       });
       return await this.userRepository.save(user);
     } catch (error) {
@@ -127,14 +137,14 @@ export class UsersService {
     }
     try {
       const { email } = inviteUserDto;
-      const appUrl = this.configService.get('APP_URL');
+      const appUrl = this.configService.get('API_URL');
       const replacements = {
         name: email.split('@')[0],
         inviter: indicator.name,
         registration_link: `${appUrl}/self-register?indicator=${indicatorId}`,
       };
       const dataToSend = {
-        to: email,
+        to: email.toLowerCase(),
         subject: 'Bem-vindo!',
         templateName: 'welcome',
         replacements,
