@@ -35,7 +35,7 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_POLL_MODE=${DATABASE_POLL_MODE}
       - DATABASE_NAME=${DATABASE_NAME}
-      - API_URL=http://localhost:3000
+      - VITE_API_URL=http://localhost:3000
       - NODE_ENV=production
       - OPENCAGE_API_KEY=${OPENCAGE_API_KEY}
       - MAIL_HOST=mailhog

@@ -137,7 +137,7 @@ export class UsersService {
     }
     try {
       const { email } = inviteUserDto;
-      const appUrl = this.configService.get('API_URL');
+      const appUrl = this.configService.get('APP_URL');
       const replacements = {
         name: email.split('@')[0],
         inviter: indicator.name,
