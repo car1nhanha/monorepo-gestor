@@ -65,14 +65,16 @@ export class EmailService {
       const htmlContent = await this.loadTemplate(templateName, replacements);
       const configService = this.getConfigService();
       const mailOptions = {
-        from: configService.get<string>('MAIL_USER'),
+        from: configService.get<string>('MAIL_SENDER'),
         to,
         subject,
         html: htmlContent,
       };
 
       const info = await this.getTransporter().sendMail(mailOptions);
-      console.log(`E-mail enviado para: ${info.envelope.from}`);
+      console.log(
+        `E-mail enviado de: ${info.envelope.from} para: ${info.envelope.to}`,
+      );
       return info;
     } catch (error) {
       console.error('Erro ao enviar e-mail:', error);

@@ -33,6 +33,7 @@ export const validationSchema = Joi.object({
   MAIL_HOST: Joi.string().required(),
   MAIL_PORT: Joi.number().required(),
   MAIL_USER: Joi.string().required(),
+  MAIL_SENDER: Joi.string().required(),
   MAIL_PASS: Joi.string().required(),
   JWT_SECRET: Joi.string().required(),
   OPENCAGE_API_KEY: Joi.string().required(),
