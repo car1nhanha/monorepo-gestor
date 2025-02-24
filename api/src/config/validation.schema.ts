@@ -5,7 +5,7 @@ export const validationSchema = Joi.object({
     .valid('development', 'production')
     .default('development'),
   PORT: Joi.number().default(3000),
-  APP_URL: Joi.string().uri().required(),
+  VITE_API_URL: Joi.string().uri().required(),
 
   // Configuração do banco de dados para produção
   DATABASE_HOST: Joi.string().when('NODE_ENV', {
