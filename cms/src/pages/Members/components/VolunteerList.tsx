@@ -16,7 +16,7 @@ export function VolunteerList() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleEdit = (id: string) => navigate(`/volunteers/${id}`);
+  const handleEdit = (id: string) => navigate(`/edit-volunteer/${id}`);
 
   if (loading) return <div className="text-center">Carregando...</div>;
 
