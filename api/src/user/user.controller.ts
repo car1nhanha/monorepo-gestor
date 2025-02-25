@@ -30,8 +30,6 @@ import { UsersService } from './user.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   @Post()
   @ApiOperation({ summary: 'Cria um volunteer (user)' })
   @ApiResponse({

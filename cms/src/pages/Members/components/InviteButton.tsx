@@ -14,7 +14,8 @@ export function InviteButton() {
     volunteerService
       .inviteUser(email)
       .then(() => alert("Convite enviado com sucesso!"))
-      .finally(() => {
+      .catch(() => alert("Erro ao enviar convite."))
+      .then(() => {
         setEmail("");
         setLoading(false);
         setIsModalOpen(false);

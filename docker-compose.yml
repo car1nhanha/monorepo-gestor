@@ -29,20 +29,21 @@ services:
       - mailhog
     environment:
       - NODE_OPTIONS=--dns-result-order=ipv4first
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_USERNAME=${DATABASE_USERNAME}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_POLL_MODE=${DATABASE_POLL_MODE}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - VITE_API_URL=http://localhost:3000
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_POLL_MODE=false
+      - DATABASE_NAME=gestordb
+      - VITE_API_URL=http://localhost:5173
       - NODE_ENV=production
       - OPENCAGE_API_KEY=${OPENCAGE_API_KEY}
       - MAIL_HOST=mailhog
       - MAIL_PORT=1025
       - MAIL_USER=teste@teste.com
       - MAIL_PASS=teste
-      - JWT_SECRET=shrek
+      - MAIL_SENDER=no-reply@gestordopovo.com
+      - JWT_SECRET=maytheforcebewithyou
       - APP_NAME=${APP_NAME}
       - CORS_ORIGIN=http://localhost:5173
     volumes:

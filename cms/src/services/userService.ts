@@ -37,7 +37,7 @@ class Userservice extends Api {
   }
 
   async inviteUser(email: string): Promise<void> {
-    return this.post<void>("/users/invite/email", { email });
+    return this.post<void>("/users/invite", { email });
   }
 }
 

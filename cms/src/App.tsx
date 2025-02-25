@@ -9,7 +9,6 @@ import { MapPage } from "./pages/MapPage";
 import { Members } from "./pages/Members";
 import { Organizations } from "./pages/Organizations";
 import { Projects } from "./pages/Projects";
-import { Register } from "./pages/register";
 import { ThankYou } from "./pages/register/await";
 import { Registration } from "./pages/self-register";
 
@@ -22,7 +21,7 @@ export default function App() {
 
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/self-register" element={<Registration />} />
             <Route path="/obrigado" element={<ThankYou />} />
           </Route>
