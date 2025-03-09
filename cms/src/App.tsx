@@ -9,6 +9,7 @@ import { Logout } from "./pages/logout/logout";
 import { MapPage } from "./pages/MapPage";
 import { Members } from "./pages/Members";
 import { Organizations } from "./pages/Organizations";
+import { CreateOrganization } from "./pages/Organizations/CreateOrganization";
 import { EditOrganization } from "./pages/Organizations/edit-organizarion";
 import { Projects } from "./pages/Projects";
 import { CreateProject } from "./pages/Projects/CreateProject";
@@ -39,6 +40,7 @@ export default function App() {
 
             <Route element={<Organizations />} path="/organizations" />
             <Route element={<EditOrganization />} path="/organization/:id" />
+            <Route element={<CreateOrganization />} path="/create-organization" />
 
             <Route element={<Projects />} path="/projects" />
             <Route element={<EditProject />} path="/project/:id" />
