@@ -9,7 +9,10 @@ import { Logout } from "./pages/logout/logout";
 import { MapPage } from "./pages/MapPage";
 import { Members } from "./pages/Members";
 import { Organizations } from "./pages/Organizations";
+import { EditOrganization } from "./pages/Organizations/edit-organizarion";
 import { Projects } from "./pages/Projects";
+import { CreateProject } from "./pages/Projects/CreateProject";
+import { EditProject } from "./pages/Projects/edit-project";
 import { ThankYou } from "./pages/register/await";
 import { Registration } from "./pages/self-register";
 
@@ -30,10 +33,17 @@ export default function App() {
           {/* Rotas protegidas */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Home />} path="/" />
+
             <Route element={<Members />} path="/members" />
             <Route element={<EditVolunteer />} path="/edit-volunteer/:id" />
+
             <Route element={<Organizations />} path="/organizations" />
+            <Route element={<EditOrganization />} path="/organization/:id" />
+
             <Route element={<Projects />} path="/projects" />
+            <Route element={<EditProject />} path="/project/:id" />
+            <Route element={<CreateProject />} path="/create-project" />
+
             <Route element={<MapPage />} path="/map" />
           </Route>
 

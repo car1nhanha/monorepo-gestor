@@ -88,4 +88,10 @@ export class OrganizationsController {
   ): Promise<{ message: string }> {
     return await this.organizationsService.deleteOrganization(id);
   }
+
+  @Get('search/:name')
+  @ApiOperation({ summary: 'Search organizations by name' })
+  async searchOrganizations(@Param('name') name: string) {
+    return await this.organizationsService.searchOrganizations(name);
+  }
 }

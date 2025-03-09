@@ -9,34 +9,28 @@ interface OrganizationListResponse {
 }
 
 class OrganizationService extends Api {
-  async getOrganizations(
-    page: number = 1,
-    limit: number = 10
-  ): Promise<OrganizationListResponse> {
-    return this.get<OrganizationListResponse>(
-      `/organizations?page=${page}&limit=${limit}`
-    );
+  async getOrganizations(page: number = 1, limit: number = 10): Promise<OrganizationListResponse> {
+    return this.get<OrganizationListResponse>(`/organizations?page=${page}&limit=${limit}`);
   }
 
   async getOrganizationById(id: string): Promise<Organization> {
     return this.get<Organization>(`/organizations/${id}`);
   }
 
-  async createOrganization(
-    organizationData: OrganizationInput
-  ): Promise<Organization> {
+  async createOrganization(organizationData: OrganizationInput): Promise<Organization> {
     return this.post<Organization>("/organizations", organizationData);
   }
 
-  async updateOrganization(
-    id: string,
-    organizationData: Partial<OrganizationInput>
-  ): Promise<Organization> {
+  async updateOrganization(id: string, organizationData: Partial<OrganizationInput>): Promise<Organization> {
     return this.put<Organization>(`/organizations/${id}`, organizationData);
   }
 
   async deleteOrganization(id: string): Promise<void> {
     return this.delete<void>(`/organizations/${id}`);
+  }
+
+  async searchOrganizations(name: string): Promise<Organization[]> {
+    return this.get<Organization[]>(`/organizations/search/${name}`);
   }
 }
 

@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { Organization } from './entities/organization.entity';
@@ -78,5 +78,12 @@ export class OrganizationsService {
     const organization = await this.getOrganizationById(id);
     await this.organizationRepository.remove(organization);
     return { message: 'Organization deleted successfully' };
+  }
+
+  async searchOrganizations(name: string): Promise<Organization[]> {
+    return await this.organizationRepository.find({
+      where: { name: ILike(`%${name}%`) },
+      select: ['id', 'name'],
+    });
   }
 }
